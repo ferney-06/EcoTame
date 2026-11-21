@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EcoTame - Gestión Inteligente de Residuos</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>🌿 EcoTame</h2>
+
+            <span>Gestión Ambiental Inteligente</span>
+
+        </div>
+
+        <nav aria-label="Navegación principal">
+
+            <ul>
+
+                <li class="menu active"
+                    data-vista="dashboard"
+                    role="button"
+                    tabindex="0"
+                    aria-current="page">
+
+                    <i class="fas fa-chart-line"></i>
+                    Dashboard
+
+                </li>
+
+                <li class="menu"
+                    data-vista="gestion"
+                    role="button"
+                    tabindex="0">
+
+                    <i class="fas fa-recycle"></i>
+                    Gestión Residuos
+
+                </li>
+
+                <li class="menu"
+                    data-vista="incidencias"
+                    role="button"
+                    tabindex="0">
+
+                    <i class="fas fa-triangle-exclamation"></i>
+                    Incidencias
+
+                </li>
+
+                <li class="menu"
+                    data-vista="indicadores"
+                    role="button"
+                    tabindex="0">
+
+                    <i class="fas fa-chart-pie"></i>
+                    Indicadores
+
+                </li>
+
+                <li class="menu"
+                    data-vista="historial"
+                    role="button"
+                    tabindex="0">
+
+                    <i class="fas fa-folder-open"></i>
+                    Historial
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+
+    <main>
+
+        <!-- ENCABEZADO -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>EcoTame</h1>
+
+                <p>
+                    Plataforma Inteligente para la Gestión de Residuos Sólidos en Tame, Arauca
+                </p>
+
+            </div>
+
+            <div class="status">
+
+                <i class="fas fa-circle-check" aria-hidden="true"></i> Sistema Operativo
+
+            </div>
+
+        </header>
+
+        <!-- DASHBOARD -->
+
+        <section id="dashboard" class="vista activa">
+
+            <div class="section-intro">
+                <div>
+                    <span class="eyebrow">Centro de operaciones</span>
+                    <h2>Panorama ambiental</h2>
+                    <p>Seguimiento ciudadano a la gestión de residuos sólidos en Tame, Arauca.</p>
+                </div>
+                <button class="button-secondary" type="button" data-ir-a="gestion">
+                    <i class="fas fa-plus"></i> Nuevo reporte
+                </button>
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+                    <i class="fas fa-file-alt"></i>
+                    <h2 id="totalReportes">0</h2>
+                    <p>Reportes Totales</p>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-recycle"></i>
+                    <h2 id="reciclables">0</h2>
+                    <p>Reciclables</p>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-trash"></i>
+                    <h2 id="ordinarios">0</h2>
+                    <p>Ordinarios</p>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-radiation"></i>
+                    <h2 id="peligrosos">0</h2>
+                    <p>Peligrosos</p>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-clock"></i>
+                    <h2 id="kpiPendientes">0</h2>
+                    <p>Pendientes</p>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-spinner"></i>
+                    <h2 id="kpiProceso">0</h2>
+                    <p>En Proceso</p>
+                </div>
+
+                <div class="card">
+                    <i class="fas fa-check-circle"></i>
+                    <h2 id="kpiResueltos">0</h2>
+                    <p>Resueltos</p>
+                </div>
+
+            </div>
+
+            <div class="panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">Sobre el proyecto</span>
+                        <h2>Gestión ambiental con participación ciudadana</h2>
+                    </div>
+                    <span class="system-badge"><i class="fas fa-circle-check"></i> Datos en este dispositivo</span>
+                </div>
+                <p class="panel-copy">EcoTame centraliza reportes de acumulación y disposición inadecuada de residuos para facilitar su seguimiento, reconocer puntos críticos y aportar información a la toma de decisiones ambientales del municipio.</p>
+
+            </div>
+
+        </section>
+
+        <!-- GESTIÓN -->
+
+        <section id="gestion" class="vista">
+
+            <div class="panel">
+
+                <h2>
+
+                    <i class="fas fa-plus-circle"></i>
+
+                    Registrar Reporte Ambiental
+
+                </h2>
+
+                <p class="form-help">Los campos marcados son obligatorios. La información se guarda localmente en este navegador.</p>
+                <form id="formReporte">
+
+                    <input id="reporteId" type="hidden">
+
+                    <div class="grid">
+
+                        <label class="field">
+                            <span>Nombre ciudadano <b>*</b></span>
+                            <input
+                            id="nombre"
+                            type="text"
+                            placeholder="Nombre de quien reporta"
+                            maxlength="100"
+                            autocomplete="name"
+                            required>
+                        </label>
+
+                        <label class="field">
+                            <span>Barrio o sector <b>*</b></span>
+                            <input
+                            id="barrio"
+                            type="text"
+                            placeholder="Ej. Centro"
+                            maxlength="100"
+                            required>
+                        </label>
+
+                    </div>
+
+                    <div class="grid">
+
+                        <label class="field">
+                            <span>Tipo de residuo <b>*</b></span>
+                            <select id="tipoResiduo" required>
+
+                            <option value="">
+                                Tipo de residuo
+                            </option>
+
+                            <option value="Reciclable">
+                                Reciclable
+                            </option>
+
+                            <option value="Ordinario">
+                                Ordinario
+                            </option>
+
+                            <option value="Peligroso">
+                                Peligroso
+                            </option>
+
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Ubicación</span>
+                            <input
+                                id="ubicacion"
+                                type="text"
+                                placeholder="Dirección, referencia o punto cercano"
+                                maxlength="180">
+                        </label>
+
+                    </div>
+
+                    <label class="field">
+                        <span>Descripción <b>*</b></span>
+                        <textarea
+                            id="descripcion"
+                            placeholder="Describe la situación, cantidad aproximada o condiciones del sitio"
+                            maxlength="1000"
+                            required></textarea>
+                    </label>
+
+                    <div class="form-actions">
+                        <button id="btnGuardarReporte" type="submit">
+
+                            <i class="fas fa-floppy-disk"></i> Registrar incidencia
+
+                        </button>
+                        <button id="btnCancelarEdicion" class="button-secondary" type="button" hidden>
+                            Cancelar edición
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- INCIDENCIAS -->
+
+        <section id="incidencias" class="vista">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+
+                        <i class="fas fa-list"></i>
+
+                        Gestión de Incidencias
+
+                    </h2>
+
+                    <button id="btnExportar">
+
+                        <i class="fas fa-file-csv"></i> Exportar CSV
+
+                    </button>
+
+                </div>
+
+                <div class="table-toolbar">
+                    <label class="search-field">
+                        <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                        <input id="buscarIncidencias" type="search" placeholder="Buscar ciudadano, barrio o ubicación" aria-label="Buscar incidencias">
+                    </label>
+                    <label class="filter-field">
+                        <span>Tipo</span>
+                        <select id="filtroTipo" aria-label="Filtrar por tipo de residuo">
+                            <option value="">Todos los tipos</option>
+                            <option value="Reciclable">Reciclable</option>
+                            <option value="Ordinario">Ordinario</option>
+                            <option value="Peligroso">Peligroso</option>
+                        </select>
+                    </label>
+                    <label class="filter-field">
+                        <span>Estado</span>
+                        <select id="filtroEstado" aria-label="Filtrar por estado">
+                            <option value="">Todos los estados</option>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="En Proceso">En Proceso</option>
+                            <option value="Resuelto">Resuelto</option>
+                        </select>
+                    </label>
+                    <span id="contadorIncidencias" class="result-count" aria-live="polite"></span>
+                </div>
+
+                <div class="table-wrap">
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Ciudadano</th>
+                        <th>Barrio</th>
+                        <th>Residuo</th>
+                        <th>Ubicación</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="tablaDatos">
+
+                    </tbody>
+
+                </table>
+                </div>
+                <p id="sinIncidencias" class="empty-state" hidden>No hay incidencias que coincidan con la búsqueda.</p>
+
+            </div>
+
+        </section>
+
+        <!-- INDICADORES -->
+
+        <section id="indicadores" class="vista">
+
+            <div class="panel">
+
+                <h2>
+
+                    <i class="fas fa-chart-column"></i>
+
+                    Indicadores Ambientales
+
+                </h2>
+
+                <p class="form-help">Los indicadores se calculan automáticamente sobre los reportes almacenados en este navegador.</p>
+                <div class="metric-cards">
+                    <div class="metric-card">
+                        <span>Porcentaje reciclable</span>
+                        <strong id="porcentajeReciclable">0%</strong>
+                        <small>Reportes reciclables sobre el total</small>
+                    </div>
+                    <div class="metric-card">
+                        <span>Reportes totales</span>
+                        <strong id="indicadorTotal">0</strong>
+                        <small>Incidencias registradas</small>
+                    </div>
+                    <div class="metric-card">
+                        <span>Casos atendidos</span>
+                        <strong id="casosAtendidos">0</strong>
+                        <small>En proceso o resueltos</small>
+                    </div>
+                    <div class="metric-card">
+                        <span>Casos pendientes</span>
+                        <strong id="casosPendientes">0</strong>
+                        <small>Requieren gestión</small>
+                    </div>
+                    <div class="metric-card">
+                        <span>Eficiencia operativa</span>
+                        <strong id="eficienciaOperativa">0%</strong>
+                        <small>Casos resueltos sobre el total</small>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+
+                    <div class="chart-card">
+
+                        <h3>
+
+                            Reportes por Tipo
+
+                        </h3>
+
+                        <canvas id="graficaResiduos">
+
+                        </canvas>
+
+                    </div>
+
+                    <div class="chart-card">
+
+                        <h3>
+
+                            Estados de Atención
+
+                        </h3>
+
+                        <canvas id="graficaEstados">
+
+                        </canvas>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- HISTORIAL -->
+
+        <section id="historial" class="vista">
+
+            <div class="panel">
+
+                <h2>
+
+                    <i class="fas fa-clock-rotate-left"></i>
+
+                    Historial General
+
+                </h2>
+
+                <div class="table-wrap">
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Fecha</th>
+                        <th>Ciudadano</th>
+                        <th>Barrio</th>
+                        <th>Tipo</th>
+                        <th>Estado</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="tablaHistorial">
+
+                    </tbody>
+
+                </table>
+                </div>
+                <p id="sinHistorial" class="empty-state" hidden>Aún no hay reportes registrados en el historial.</p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<dialog id="dialogoDetalles" class="details-dialog" aria-labelledby="tituloDetalles">
+    <div class="details-heading">
+        <div>
+            <span class="eyebrow">Información del reporte</span>
+            <h2 id="tituloDetalles">Detalle de la incidencia</h2>
+        </div>
+        <button class="button-secondary details-close" type="button" data-cerrar-detalles aria-label="Cerrar detalles">
+            <i class="fas fa-xmark" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="details-grid">
+        <div class="details-item">
+            <span>Ciudadano</span>
+            <strong id="detalleNombre"></strong>
+        </div>
+        <div class="details-item">
+            <span>Barrio o sector</span>
+            <strong id="detalleBarrio"></strong>
+        </div>
+        <div class="details-item">
+            <span>Tipo de residuo</span>
+            <strong id="detalleTipo"></strong>
+        </div>
+        <div class="details-item">
+            <span>Ubicación</span>
+            <strong id="detalleUbicacion"></strong>
+        </div>
+        <div class="details-item">
+            <span>Fecha del reporte</span>
+            <strong id="detalleFecha"></strong>
+        </div>
+        <div class="details-item">
+            <span>Estado actual</span>
+            <strong id="detalleEstado"></strong>
+        </div>
+    </div>
+    <section class="details-description" aria-labelledby="tituloDescripcionDetalle">
+        <h3 id="tituloDescripcionDetalle">Descripción</h3>
+        <p id="detalleDescripcion"></p>
+    </section>
+    <div class="details-actions">
+        <button class="button-secondary" type="button" data-cerrar-detalles>Cerrar</button>
+    </div>
+</dialog>
+
+<div id="notificaciones" class="toast-region" aria-live="polite" aria-atomic="false"></div>
+
+<!-- CHART JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+<script src="js/charts.js"></script>
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
